@@ -20,37 +20,37 @@
 
 ### Методы класса BooksCollector:
 
-#### **add_new_book(name)**
+#### - **add_new_book(name)**
 Добавляет новую книгу в словарь без указания жанра.
 Название книги может содержать максимум 40 символов.
 Одну и ту же книгу можно добавить только один раз.
 
-#### **set_book_genre(name, genre)**
+#### - **set_book_genre(name, genre)**
 Устанавливает жанр книги, если книга есть в `books_genre` и её жанр входит в список `genre`.
 
-#### **get_book_genre(name)**
+#### - **get_book_genre(name)**
 Возвращает жанр книги по её имени.
 
-#### **get_books_with_specific_genre(genre)**
+#### - **get_books_with_specific_genre(genre)**
 Возвращает список книг с определённым жанром.
 Жанр должен входить в список доступных жанров `genre`.
 
-#### **get_books_genre()**
+#### - **get_books_genre()**
 Возвращает текущий словарь `books_genre`.
 
-#### **get_books_for_children()**
+#### - **get_books_for_children()**
 Возвращает список книг, которые подходят детям.
 У жанра книги не должно быть возрастного рейтинга (т.е. жанр книги не должен входить в список `genre_age_rating`).
 
-#### **add_book_in_favorites(name)**
+#### - **add_book_in_favorites(name)**
 Добавляет книгу в избранное.
 Книга должна находиться в словаре `books_genre`.
 Повторно добавить книгу в избранное нельзя.
 
-#### **delete_book_from_favorites(name)**
+#### - **delete_book_from_favorites(name)**
 Удаляет книгу из избранного, если она там есть.
 
-#### **get_list_of_favorites_books()**
+#### - **get_list_of_favorites_books()**
 Возвращает список книг в избранном.
 
 ---
