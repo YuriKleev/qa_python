@@ -88,16 +88,16 @@ class TestBooksCollector:
     def test_get_books_genre_empty_dict (self, collector):
         assert collector.books_genre == {}
 
-    def test_get_books_for_children_input_book_is_for_children_book_added (self, collector):
-        collector.add_new_book('Гиперион')
-        collector.set_book_genre('Гиперион','Фантастика')
-        assert 'Гиперион' in collector.get_books_for_children()
-
-    def test_get_books_for_children_input_book_adult_rating_book_not_added (self, collector):
-        collector.add_new_book('Оно')
-        collector.set_book_genre('Оно','Ужасы')
-        assert 'Оно' not in collector.get_books_for_children()
-
+    @pytest.mark.parametrize('book_name, genre_name, expected_result', 
+		[
+			('Гиперион', 'Фантастика', True),
+			('Оно', 'Ужасы', False)
+		]
+	)
+    def test_get_books_for_children (self, collector, book_name, genre_name, expected_result):
+        collector.add_new_book(book_name)
+        collector.set_book_genre(book_name, genre_name)
+        assert (book_name in collector.get_books_for_children()) == expected_result
 
     def test_add_book_in_favorites_add_existent_book_book_added (self, collector):
         collector.add_new_book('Гиперион')
