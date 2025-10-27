@@ -72,7 +72,7 @@ class TestBooksCollector:
         collector.set_book_genre('Оно','Ужасы')        
         collector.add_new_book('Темная башня')
         collector.set_book_genre('Темная башня','Фантастика')
-        assert collector.get_books_with_specific_genre('Фантастика') == ['Гиперион']
+        assert collector.get_books_with_specific_genre('Фантастика') == ['Гиперион','Темная башня']
 
     @pytest.mark.parametrize('genre_name', ['Мелодрама',''])
     def test_get_books_with_specific_genre_nonexistent_genre (self, collector, genre_name):
@@ -83,10 +83,10 @@ class TestBooksCollector:
     def test_get_books_genre_dict_not_empty (self, collector):
         collector.add_new_book('Гиперион')
         collector.set_book_genre('Гиперион','Фантастика')
-        assert collector.get_books_genre() == {'Гиперион': 'Фантастика'}
+        assert collector.books_genre == {'Гиперион': 'Фантастика'}
 
     def test_get_books_genre_empty_dict (self, collector):
-        assert collector.get_books_genre() == {}
+        assert collector.books_genre == {}
 
     def test_get_books_for_children_input_book_is_for_children_book_added (self, collector):
         collector.add_new_book('Гиперион')
@@ -102,32 +102,32 @@ class TestBooksCollector:
     def test_add_book_in_favorites_add_existent_book_book_added (self, collector):
         collector.add_new_book('Гиперион')
         collector.add_book_in_favorites('Гиперион')
-        assert 'Гиперион' in collector.get_list_of_favorites_books()
+        assert 'Гиперион' in collector.favorites
 
     def test_add_book_in_favorites_add_nonexistent_book_book_not_added (self, collector):
         collector.add_book_in_favorites('Книга, которой нет в списке')
-        assert 'Книга, которой нет в списке' not in collector.get_list_of_favorites_books()
+        assert 'Книга, которой нет в списке' not in collector.favorites
 
     def test_add_book_in_favorites_add_book_twice_second_book_not_added (self, collector):
         collector.add_new_book('Гиперион')
         collector.add_book_in_favorites('Гиперион')
         collector.add_book_in_favorites('Гиперион')
-        assert collector.get_list_of_favorites_books().count('Гиперион') == 1
+        assert collector.favorites.count('Гиперион') == 1
 
     def test_delete_book_from_favorites_delete_existent_book_book_deleted (self, collector):
         collector.add_new_book('Гиперион')
         collector.add_book_in_favorites('Гиперион')
         collector.delete_book_from_favorites('Гиперион')
-        assert collector.get_list_of_favorites_books().count('Гиперион') == 0
+        assert collector.favorites.count('Гиперион') == 0
 
     def test_delete_book_from_favorites_delete_nonexistent_book (self, collector):
         collector.delete_book_from_favorites('Книга, которой нет в списке')
-        assert 'Книга, которой нет в списке' not in collector.get_list_of_favorites_books()
+        assert 'Книга, которой нет в списке' not in collector.favorites
 
     def test_get_list_of_favorites_books_list_not_empty (self, collector):
         collector.add_new_book('Гиперион')
         collector.add_book_in_favorites('Гиперион')
-        assert collector.get_list_of_favorites_books() == ['Гиперион']
+        assert collector.favorites == ['Гиперион']
 
     def test_get_list_of_favorites_books_empty_list (self, collector):
-        assert collector.get_list_of_favorites_books() == []    
+        assert collector.favorites == []    
