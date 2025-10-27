@@ -68,6 +68,10 @@ class TestBooksCollector:
     def test_get_books_with_specific_genre_existent_genre (self, collector):
         collector.add_new_book('Гиперион')
         collector.set_book_genre('Гиперион','Фантастика')
+        collector.add_new_book('Оно')
+        collector.set_book_genre('Оно','Ужасы')        
+        collector.add_new_book('Темная башня')
+        collector.set_book_genre('Темная башня','Фантастика')
         assert collector.get_books_with_specific_genre('Фантастика') == ['Гиперион']
 
     @pytest.mark.parametrize('genre_name', ['Мелодрама',''])
