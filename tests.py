@@ -126,8 +126,8 @@ class TestBooksCollector:
 
     def test_get_list_of_favorites_books_list_not_empty (self, collector):
         collector.add_new_book('Гиперион')
-        collector.add_book_in_favorites('Гиперион')
-        assert collector.favorites == ['Гиперион']
+        collector.favorites.append('Гиперион')
+        assert collector.get_list_of_favorites_books() == ['Гиперион']
 
     def test_get_list_of_favorites_books_empty_list (self, collector):
-        assert collector.favorites == []    
+        assert collector.get_list_of_favorites_books() == []    
